@@ -79,7 +79,7 @@ void OW_OneWire_Init(GPIO_TypeDef* GPIOx, uint16_t GPIO_Pin) {
 	GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_MEDIUM;
 	ONEWIRE_IO_Init(GPIOx, &GPIO_InitStruct);
 
-	ONEWIRE_HIGH(KART_ID_1WIRE_S1_GPIO_Port, KART_ID_1WIRE_S1_Pin);
+	ONEWIRE_HIGH(CARD_ID_1WIRE_S1_GPIO_Port, CARD_ID_1WIRE_S1_Pin);
 	/* Save settings */
 	OW_SetSpeed(STANDARD_SPEED);
 }
@@ -93,7 +93,7 @@ void OW_SetSpeed(int standard){
 	if (standard)
 	{
 			// Standard Speed
-			A = 8  ;	  // 6us  min5  - max15 us    * 30
+			A = 8  ;      // 6us  min5  - max15 us    * 30
 			B = 64 ;      // 64us (65 - A)us          * 30
 			C = 60 ;      // 60us min60 - max120 us   * 30
 			D = 12 ;      // 10us (65 + B)us          * 30
@@ -123,19 +123,18 @@ void OW_SetSpeed(int standard){
 //-----------------------------------------------------------------------------
 // Generate a 1-Wire reset, return 1 if no presence detect was found,
 // return 0 otherwise.
-// 
 //
 int OW_TouchReset(void)
 {
 	int result;
 	
 	ONEWIRE_DELAY(G);
-	ONEWIRE_LOW(KART_ID_1WIRE_S1_GPIO_Port, KART_ID_1WIRE_S1_Pin);
+	ONEWIRE_LOW(CARD_ID_1WIRE_S1_GPIO_Port, CARD_ID_1WIRE_S1_Pin);
 	ONEWIRE_DELAY(H);
-	ONEWIRE_HIGH(KART_ID_1WIRE_S1_GPIO_Port, KART_ID_1WIRE_S1_Pin);
-	ONEWIRE_INPUT(KART_ID_1WIRE_S1_GPIO_Port, KART_ID_1WIRE_S1_Pin);
+	ONEWIRE_HIGH(CARD_ID_1WIRE_S1_GPIO_Port, CARD_ID_1WIRE_S1_Pin);
+	ONEWIRE_INPUT(CARD_ID_1WIRE_S1_GPIO_Port, CARD_ID_1WIRE_S1_Pin);
 	ONEWIRE_DELAY(I);
-	result = ONEWIRE_READ(KART_ID_1WIRE_S1_GPIO_Port, KART_ID_1WIRE_S1_Pin) ^ 0x01; // Sample for presence pulse from slave
+	result = ONEWIRE_READ(CARD_ID_1WIRE_S1_GPIO_Port, CARD_ID_1WIRE_S1_Pin);^ 0x01; // Sample for presence pulse from slave
 	ONEWIRE_DELAY(J); // Complete the reset sequence recovery
 
 	return result; // Return sample presence pulse result
@@ -147,17 +146,17 @@ void OW_WriteBit(uint8_t bit)
 	if (bit)
 	{
 		// Write '1' bit
-		ONEWIRE_LOW(KART_ID_1WIRE_S1_GPIO_Port, KART_ID_1WIRE_S1_Pin);
+		ONEWIRE_LOW(CARD_ID_1WIRE_S1_GPIO_Port, CARD_ID_1WIRE_S1_Pin);
 		ONEWIRE_DELAY(A);
-		ONEWIRE_HIGH(KART_ID_1WIRE_S1_GPIO_Port, KART_ID_1WIRE_S1_Pin);
+		ONEWIRE_HIGH(CARD_ID_1WIRE_S1_GPIO_Port, CARD_ID_1WIRE_S1_Pin);
 		ONEWIRE_DELAY(B); // Complete the time slot and 10us recovery
 	}
 	else
 	{
 		// Write '0' bit
-		ONEWIRE_LOW(KART_ID_1WIRE_S1_GPIO_Port, KART_ID_1WIRE_S1_Pin);
+		ONEWIRE_LOW(CARD_ID_1WIRE_S1_GPIO_Port, CARD_ID_1WIRE_S1_Pin);
 		ONEWIRE_DELAY(C);
-		ONEWIRE_HIGH(KART_ID_1WIRE_S1_GPIO_Port, KART_ID_1WIRE_S1_Pin);
+		ONEWIRE_HIGH(CARD_ID_1WIRE_S1_GPIO_Port, CARD_ID_1WIRE_S1_Pin);
 		ONEWIRE_DELAY(D); // Complete the time slot and 10us recovery
 	}
 }
@@ -166,12 +165,12 @@ void OW_WriteBit(uint8_t bit)
 int OW_ReadBit(void)
 {
 	uint8_t result = 0;
-	ONEWIRE_OUTPUT(KART_ID_1WIRE_S1_GPIO_Port, KART_ID_1WIRE_S1_Pin);
-	ONEWIRE_LOW(KART_ID_1WIRE_S1_GPIO_Port, KART_ID_1WIRE_S1_Pin);
+	ONEWIRE_OUTPUT(CARD_ID_1WIRE_S1_GPIO_Port, CARD_ID_1WIRE_S1_Pin);
+	ONEWIRE_LOW(CARD_ID_1WIRE_S1_GPIO_Port, CARD_ID_1WIRE_S1_Pin);
 	ONEWIRE_DELAY(A); 
-    ONEWIRE_INPUT(KART_ID_1WIRE_S1_GPIO_Port, KART_ID_1WIRE_S1_Pin);
+    	ONEWIRE_INPUT(CARD_ID_1WIRE_S1_GPIO_Port, CARD_ID_1WIRE_S1_Pin);
 	ONEWIRE_DELAY(E); // 9
-	result = ONEWIRE_READ(KART_ID_1WIRE_S1_GPIO_Port, KART_ID_1WIRE_S1_Pin); // Sample the bit value from the slave
+	result = ONEWIRE_READ(CARD_ID_1WIRE_S1_GPIO_Port, CARD_ID_1WIRE_S1_Pin);// Sample the bit value from the slave
 	ONEWIRE_DELAY(F); // 55  Complete the time slot and 10us recovery
 
 	return result;
@@ -189,7 +188,7 @@ void OW_WriteByte(uint8_t data)
 		// shift the data byte for the next bit
 		data = data >> 1;
 	}
-	ONEWIRE_HIGH(KART_ID_1WIRE_S1_GPIO_Port, KART_ID_1WIRE_S1_Pin);
+	ONEWIRE_HIGH(CARD_ID_1WIRE_S1_GPIO_Port, CARD_ID_1WIRE_S1_Pin);
 }
 
 uint8_t cmndcntr = 0 ;
@@ -219,7 +218,7 @@ uint8_t OW_ReadByte(void)
 void OW_SkipRom(void)
 {
 	uint8_t presence = OW_TouchReset();
-	ONEWIRE_OUTPUT(KART_ID_1WIRE_S1_GPIO_Port, KART_ID_1WIRE_S1_Pin);
+	ONEWIRE_OUTPUT(CARD_ID_1WIRE_S1_GPIO_Port, CARD_ID_1WIRE_S1_Pin);
 	OW_WriteByte(ONEWIRE_CMD_SKIPROM);  // read rom command 
 }
 
@@ -228,7 +227,7 @@ void OW_ReadRom(void)
 	// 1-Wire reset
 	uint8_t presence = OW_TouchReset();
 	
-	ONEWIRE_OUTPUT(KART_ID_1WIRE_S1_GPIO_Port, KART_ID_1WIRE_S1_Pin);
+	ONEWIRE_OUTPUT(CARD_ID_1WIRE_S1_GPIO_Port, CARD_ID_1WIRE_S1_Pin);
 	
 	// issue the read rom command
 	OW_WriteByte(ONEWIRE_CMD_READROM);  // read rom command 
@@ -239,14 +238,14 @@ void OW_ReadRom(void)
 		 cmndcntr++;
 	}
 	
-	ONEWIRE_OUTPUT(KART_ID_1WIRE_S1_GPIO_Port, KART_ID_1WIRE_S1_Pin); 
+	ONEWIRE_OUTPUT(CARD_ID_1WIRE_S1_GPIO_Port, CARD_ID_1WIRE_S1_Pin);
 }
 
 
 int OW_ReadRomCommand(void)
 {
 	int rslt,i;
-	OW_OneWire_Init(KART_ID_1WIRE_S1_GPIO_Port, KART_ID_1WIRE_S1_Pin);
+	OW_OneWire_Init(CARD_ID_1WIRE_S1_GPIO_Port, CARD_ID_1WIRE_S1_Pin);
     
 #if FREERTOS
 	/*
@@ -256,7 +255,7 @@ int OW_ReadRomCommand(void)
 	taskENTER_CRITICAL();
 #endif
     
-    OW_ReadRom();
+    	OW_ReadRom();
 
 	printh(" Family Code:: %02X \n Card id    :: ", ROM_NO[0]);
 	// print device found
@@ -272,7 +271,7 @@ int OW_ReadRomCommand(void)
 	*/
 	taskEXIT_CRITICAL();
 #endif
-	ONEWIRE_HIGH(KART_ID_1WIRE_S1_GPIO_Port, KART_ID_1WIRE_S1_Pin);
+	ONEWIRE_HIGH(CARD_ID_1WIRE_S1_GPIO_Port, CARD_ID_1WIRE_S1_Pin);
 
 	return 1;
 }

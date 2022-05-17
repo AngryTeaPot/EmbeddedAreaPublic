@@ -3,11 +3,11 @@
 
 #include "stm32l4xx_hal.h"
 #include "gpio.h"
-#include "utility.h"
 
 
 
-// definitions
+
+/* Definitions */
 #define FALSE 0
 #define TRUE  1
 #define FREERTOS
