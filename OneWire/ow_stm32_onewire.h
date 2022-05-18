@@ -1,13 +1,22 @@
 #ifndef OW_ONEWIRE_H
 #define OW_ONEWIRE_H 100
 
+#ifdef __cplusplus
+extern "C" {
+#endif
+
+/************************************
+ * INCLUDES
+ ************************************/
 #include "stm32l4xx_hal.h"
 #include "gpio.h"
 
 
 
 
-/* Definitions */
+/************************************
+ * MACROS AND DEFINES
+ ************************************/
 #define FALSE 0
 #define TRUE  1
 #define FREERTOS
@@ -39,6 +48,9 @@
 #define ONEWIRE_CMD_SKIPROM				0xCC
 
 
+/************************************
+ * TYPEDEFS
+ ************************************/
 typedef struct{
 	uint8_t familyCode;
 	uint8_t romID[6];
@@ -50,6 +62,10 @@ typedef enum{
 	STANDARD_SPEED
 }OW_SPEED;
 
+
+/************************************
+ * GLOBAL FUNCTION PROTOTYPES
+ ************************************/
 int OW_ReadRomCommand(void);
 void OW_SetSpeed(int standard);
 
