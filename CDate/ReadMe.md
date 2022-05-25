@@ -1,0 +1,1 @@
+The Library is written for using windows.h library in the pre-build sections of embbedded compilers.
