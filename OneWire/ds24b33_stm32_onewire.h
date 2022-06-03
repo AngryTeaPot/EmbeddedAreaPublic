@@ -1,3 +1,17 @@
+/**
+	******************************************************************************
+	* @file    ds24b33_stm32_onewire.h
+	* @brief   This file contains all the function prototypes for
+	*          the ds24b33_stm32_onewire.hfile
+	******************************************************************************
+	* @attention
+	*
+	* Copyright (c) Embedded Area.
+	* All rights reserved.
+	*
+	*
+	******************************************************************************
+	*/
 #ifndef __DS24B33_STM32_ONEWIRE_H__
 #define __DS24B33_STM32_ONEWIRE_H__	100
 

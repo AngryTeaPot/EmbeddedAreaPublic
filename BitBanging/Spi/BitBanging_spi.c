@@ -1,3 +1,17 @@
+/**
+  **********************************************************************************************
+  * @file    BitBanging_spi.c
+  * @brief   This file contains all the functions for
+  *          the BitBanging_spi
+  **********************************************************************************************
+  * @attention
+  *
+  * Copyright (c) Embedded Area.
+  * All rights reserved.
+  *
+  **********************************************************************************************
+  */
+
 #include "BitBanging_spi.h"
 #include "main.h"
 

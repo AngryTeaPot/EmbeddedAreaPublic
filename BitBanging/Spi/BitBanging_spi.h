@@ -1,3 +1,18 @@
+/**
+	******************************************************************************
+	* @file    BitBanging_spi.h
+	* @brief   This file contains all the function prototypes for
+	*          the BitBanging_spi.h file
+	******************************************************************************
+	* @attention
+	*
+	* Copyright (c) Embedded Area.
+	* All rights reserved.
+	*
+	*
+	******************************************************************************
+	*/
+
 #ifndef __BITBANGING_SPI_H__
 #define	__BITBANGING_SPI_H__
 
