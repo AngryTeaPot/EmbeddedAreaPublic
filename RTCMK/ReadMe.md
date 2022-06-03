@@ -1,1 +1,1 @@
-The Library is written for rtc_mk device which real time clock. 
+The Library is written for rtc_mk device which is real time clock. 

@@ -13,12 +13,6 @@
 
 /* Includes ------------------------------------------------------------------*/
 #include "i2c.h"
-#include "rtc_mk.h"
-#include "global.h"
-#include "serialPort.h"
-#include "console.h"
-#include "EEPROM.h"
-
 
 
 /* Global Variables --------------------------------------------------------------------------*/
