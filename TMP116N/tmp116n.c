@@ -32,15 +32,15 @@ static int TMP116N_LL(TMP116N_ts *me, TMP_OperationTypeDef_e Tmp_Operation, uint
 	switch(Tmp_Operation)
 	{
 		case TMP_RESET:
-				TMP116N_Write(TMP116N_REG_TEMP,						0x8000);
-				TMP116N_Write(TMP116N_REG_CONF,						0x0220);
+				TMP116N_Write(TMP116N_REG_TEMP,				0x8000);
+				TMP116N_Write(TMP116N_REG_CONF,				0x0220);
 				TMP116N_Write(TMP116N_REG_LIMIT_HIGH,			0x6000);
 				TMP116N_Write(TMP116N_REG_LIMIT_LOW,			0x8000);
-				TMP116N_Write(TMP116N_REG_EEPROM_UNLOCK,	0x0000);
-				TMP116N_Write(TMP116N_REG_EEPROM1,				0x0000);
-				TMP116N_Write(TMP116N_REG_EEPROM2,				0x0000);
-				TMP116N_Write(TMP116N_REG_EEPROM3,				0x0000);
-				TMP116N_Write(TMP116N_REG_EEPROM4,				0x0000);
+				TMP116N_Write(TMP116N_REG_EEPROM_UNLOCK,		0x0000);
+				TMP116N_Write(TMP116N_REG_EEPROM1,			0x0000);
+				TMP116N_Write(TMP116N_REG_EEPROM2,			0x0000);
+				TMP116N_Write(TMP116N_REG_EEPROM3,			0x0000);
+				TMP116N_Write(TMP116N_REG_EEPROM4,			0x0000);
 				TMP116N_Write(TMP116N_REG_DEVICE_ID,			0x1116);
 			break;
 		
@@ -80,10 +80,10 @@ static int TMP116N_LL(TMP116N_ts *me, TMP_OperationTypeDef_e Tmp_Operation, uint
 /* Global Functions  ---------------------------------------------------------*/
 /**
 	* @brief			TMP116N_Init Init Task
-	* @param[in]			me						: Handle Pointer
+	* @param[in]			me			: Handle Pointer
 	* @param[in]			i2cHandler		: Register Address
-	* @param[in]			deviceAddress	: Target Device Address
-	* @param[in]			TimeOut				: Program TimeOut
+	* @param[in]			deviceAddress		: Target Device Address
+	* @param[in]			TimeOut			: Program TimeOut
 	* @retval			value					
   */
 TMP_StatusTypeDef_e TMP116N_Init(TMP116N_ts *me,  I2C_HandleTypeDef *i2cHandler, uint8_t deviceAddress, uint16_t TimeOut){
@@ -98,7 +98,7 @@ TMP_StatusTypeDef_e TMP116N_Init(TMP116N_ts *me,  I2C_HandleTypeDef *i2cHandler,
 
 /**
 	* @brief			TMP116N_isConnected checks the device is connected or not. 
-	* @param[in]			me						: Handle pointer
+	* @param[in]			me			: Handle pointer
 	* @retval			FlagStatus					
   */
 TMP_StatusTypeDef_e TMP116N_isConnected(TMP116N_ts *me){
@@ -133,7 +133,7 @@ void TMP116N_setHighTH(void){
 /**
 	* @brief			TMP116N_Read_2_Byte reads the 2 bytes of temperature value  from device. 
 	* @param[in]			me			: Handle pointer
-	* @param[in]			RegAddr	: Register Address
+	* @param[in]			RegAddr			: Register Address
 	* @retval			value					
   */
 uint16_t TMP116N_Read_2_Byte(TMP116N_ts *me, uint8_t RegAddr){
@@ -143,8 +143,8 @@ uint16_t TMP116N_Read_2_Byte(TMP116N_ts *me, uint8_t RegAddr){
 
 /**
 	* @brief			TMP116N_Write writes the data to the given register address.
-	* @param[in]			RegAddr	: Register Address
-	* @param[in]			pData	  : Data to writing at the given register address.
+	* @param[in]			RegAddr			: Register Address
+	* @param[in]			pData			: Data to writing at the given register address.
 	* @retval			TMP_StatusTypeDef_e					
   */
 TMP_StatusTypeDef_e TMP116N_Write(uint8_t RegAddr, int16_t pData ){
@@ -159,7 +159,7 @@ TMP_StatusTypeDef_e TMP116N_Write(uint8_t RegAddr, int16_t pData ){
 
 /**
 	* @brief			TMP116N_readTemperatureRaw reads the raw temperature value  from device. 
-	* @param[in]			me	: Handle pointer
+	* @param[in]			me			: Handle pointer
 	* @retval			value					
   */
 uint16_t TMP116N_readTemperatureRaw(TMP116N_ts *me){
@@ -169,7 +169,7 @@ uint16_t TMP116N_readTemperatureRaw(TMP116N_ts *me){
 
 /**
 	* @brief			TMP116N_ReadTemperature reads the temperature value  from device. 
-	* @param[in]			me	: Handle pointer
+	* @param[in]			me			: Handle pointer
 	* @retval			value					
   */
 float TMP116N_ReadTemperature(TMP116N_ts *me){
@@ -179,7 +179,7 @@ float TMP116N_ReadTemperature(TMP116N_ts *me){
 
 /**
 	* @brief			TMP116N_convertRawTemp converts the raw value came from device. 
-	* @param[in]			rawTemp : The parameter value that comes from the device.
+	* @param[in]			rawTemp			: The parameter value that comes from the device.
 	* @retval			value					
   */
 float TMP116N_convertRawTemp(int16_t rawTemp){
@@ -189,7 +189,7 @@ float TMP116N_convertRawTemp(int16_t rawTemp){
 
 /**
 	* @brief			TMP116N_Reset resets the device. 
-	* @param[in]			me	: Handle pointer
+	* @param[in]			me			: Handle pointer
 	* @retval			value					
   */
 int	TMP116N_Reset(TMP116N_ts *me){
